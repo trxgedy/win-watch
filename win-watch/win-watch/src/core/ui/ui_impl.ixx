@@ -298,13 +298,13 @@ namespace ui
             ImGui::SetCursorPos( {10, 10} );
             ImGui::Text( "win-watch | FPS: %d", static_cast< std::uint32_t >( ImGui::GetIO( ).Framerate ) );
 
-	    	ImGui::SetCursorPos( { w_size.x - 20, 0 } );
+	    ImGui::SetCursorPos( { w_size.x - 20, 0 } );
             if( ImGui::Button( "X", { 20,20 } ) )
 				w_context.context_state = false;
 
             ImGui::SetCursorPos( { 0, 28 } );
-			widgets::tabs::add_tab( "Processes", tabs::TAB_PROCESSES, current_tab == tabs::TAB_PROCESSES );
-			ImGui::SameLine( 0, 0 );
+	    widgets::tabs::add_tab( "Processes", tabs::TAB_PROCESSES, current_tab == tabs::TAB_PROCESSES );
+	    ImGui::SameLine( 0, 0 );
             widgets::tabs::add_tab( "Services", tabs::TAB_SERVICES, current_tab == tabs::TAB_SERVICES );
 
             ImGui::SetCursorPos( padding );
