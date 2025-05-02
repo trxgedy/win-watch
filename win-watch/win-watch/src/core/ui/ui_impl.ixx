@@ -150,7 +150,7 @@ namespace ui
         this->w_size = { width, height };
 
         if( !create_window( ) )
-			return false;
+		return false;
 
         D3DX11CreateShaderResourceViewFromMemory( w_context.g_pd3dDevice, images::exe_icon_bytes, sizeof( images::exe_icon_bytes ), NULL, NULL, &this->exe_icon, NULL );
         D3DX11CreateShaderResourceViewFromMemory( w_context.g_pd3dDevice, images::svc_icon_bytes, sizeof( images::svc_icon_bytes ), NULL, NULL, &this->svc_icon, NULL );
@@ -263,7 +263,7 @@ namespace ui
         style.Colors[ ImGuiCol_TableBorderStrong ] = ImColor( 0, 0, 0, 0 );
         style.Colors[ ImGuiCol_TableBorderLight ] = ImColor( 90,90,90 );
 
-		style.Colors[ ImGuiCol_ScrollbarBg ] = ImColor( 0, 0, 0, 0 );
+	style.Colors[ ImGuiCol_ScrollbarBg ] = ImColor( 0, 0, 0, 0 );
 
         style.WindowPadding = { 0, 0 };
         style.WindowRounding = 4;
@@ -311,7 +311,7 @@ namespace ui
 
             switch ( current_tab )
             {
-				case tabs::TAB_PROCESSES:
+		case tabs::TAB_PROCESSES:
                 {
                     widgets::table::process::begin( "process_table", { w_size.x, w_size.y - 60 } );
                     {
@@ -343,8 +343,8 @@ namespace ui
                             widgets::table::service::append( watcher_->services.at( i ).service_name.c_str( ),
                                                              watcher_->services.at( i ).pid,
                                                              watcher_->services.at( i ).display_name.c_str( ),
-														     watcher_->services.at( i ).status,
-														     watcher_->services.at( i ).start_type
+							     watcher_->services.at( i ).status,
+							     watcher_->services.at( i ).start_type
                             );
                         }
                     }
