@@ -2,7 +2,7 @@
 monitors and interacts with window's processes and services
 
 ## features
-- get processes name, pid, description
+- get process name, pid, description
 - get service name, pid, display name, status, start type
 - sort by name and pid
 
