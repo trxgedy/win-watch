@@ -236,7 +236,7 @@ namespace ui
         DestroyWindow( w_context.hwnd );
         UnregisterClassA( w_context.wc.lpszClassName, w_context.wc.hInstance );
 
-		return true;
+	return true;
     }
 
     void c_window::menu_style( )
@@ -263,7 +263,7 @@ namespace ui
         style.Colors[ ImGuiCol_TableBorderStrong ] = ImColor( 0, 0, 0, 0 );
         style.Colors[ ImGuiCol_TableBorderLight ] = ImColor( 90,90,90 );
 
-	style.Colors[ ImGuiCol_ScrollbarBg ] = ImColor( 0, 0, 0, 0 );
+		style.Colors[ ImGuiCol_ScrollbarBg ] = ImColor( 0, 0, 0, 0 );
 
         style.WindowPadding = { 0, 0 };
         style.WindowRounding = 4;
@@ -291,7 +291,6 @@ namespace ui
                 SetWindowPos( w_context.hwnd, nullptr, rect.left + ImGui::GetMouseDragDelta( ).x, rect.top + ImGui::GetMouseDragDelta( ).y, 0, 0, SWP_NOSIZE | SWP_NOZORDER );
             }
 
-
             static auto *draw = ImGui::GetWindowDrawList( );
             static auto padding = ImVec2( 0, 53 );
 
@@ -299,7 +298,7 @@ namespace ui
             ImGui::SetCursorPos( {10, 10} );
             ImGui::Text( "win-watch | FPS: %d", static_cast< std::uint32_t >( ImGui::GetIO( ).Framerate ) );
 
-			ImGui::SetCursorPos( { w_size.x - 20, 0 } );
+	    	ImGui::SetCursorPos( { w_size.x - 20, 0 } );
             if( ImGui::Button( "X", { 20,20 } ) )
 				w_context.context_state = false;
 
@@ -312,7 +311,7 @@ namespace ui
 
             switch ( current_tab )
             {
-		case tabs::TAB_PROCESSES:
+				case tabs::TAB_PROCESSES:
                 {
                     widgets::table::process::begin( "process_table", { w_size.x, w_size.y - 60 } );
                     {
@@ -331,6 +330,7 @@ namespace ui
 
                     break;
                 }
+
                 case tabs::TAB_SERVICES:
                 {
                     widgets::table::service::begin( "service_table", { w_size.x, w_size.y - 60 } );
@@ -343,8 +343,8 @@ namespace ui
                             widgets::table::service::append( watcher_->services.at( i ).service_name.c_str( ),
                                                              watcher_->services.at( i ).pid,
                                                              watcher_->services.at( i ).display_name.c_str( ),
-							     watcher_->services.at( i ).status,
-							     watcher_->services.at( i ).start_type
+														     watcher_->services.at( i ).status,
+														     watcher_->services.at( i ).start_type
                             );
                         }
                     }
