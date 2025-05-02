@@ -41,7 +41,7 @@ export namespace ui
 		inline static enum tabs
 		{
 			TAB_PROCESSES,
-            TAB_SERVICES
+			TAB_SERVICES
 		} current_tab = { TAB_PROCESSES };
 
     private:
