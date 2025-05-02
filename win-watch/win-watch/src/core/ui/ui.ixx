@@ -38,11 +38,11 @@ export namespace ui
         inline static ID3D11ShaderResourceView *exe_icon = nullptr;
         inline static ID3D11ShaderResourceView *svc_icon = nullptr;
 
-		inline static enum tabs
-		{
-			TAB_PROCESSES,
-			TAB_SERVICES
-		} current_tab = { TAB_PROCESSES };
+	inline static enum tabs
+	{
+		TAB_PROCESSES,
+		TAB_SERVICES
+	} current_tab = { TAB_PROCESSES };
 
     private:
         char *window_name { };
