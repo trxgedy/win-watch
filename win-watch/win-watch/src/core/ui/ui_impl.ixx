@@ -263,7 +263,7 @@ namespace ui
         style.Colors[ ImGuiCol_TableBorderStrong ] = ImColor( 0, 0, 0, 0 );
         style.Colors[ ImGuiCol_TableBorderLight ] = ImColor( 90,90,90 );
 
-		style.Colors[ ImGuiCol_ScrollbarBg ] = ImColor( 0, 0, 0, 0 );
+	style.Colors[ ImGuiCol_ScrollbarBg ] = ImColor( 0, 0, 0, 0 );
 
         style.WindowPadding = { 0, 0 };
         style.WindowRounding = 4;
