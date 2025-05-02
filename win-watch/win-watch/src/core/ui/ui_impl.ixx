@@ -150,7 +150,7 @@ namespace ui
         this->w_size = { width, height };
 
         if( !create_window( ) )
-		return false;
+	    return false;
 
         D3DX11CreateShaderResourceViewFromMemory( w_context.g_pd3dDevice, images::exe_icon_bytes, sizeof( images::exe_icon_bytes ), NULL, NULL, &this->exe_icon, NULL );
         D3DX11CreateShaderResourceViewFromMemory( w_context.g_pd3dDevice, images::svc_icon_bytes, sizeof( images::svc_icon_bytes ), NULL, NULL, &this->svc_icon, NULL );
@@ -300,7 +300,7 @@ namespace ui
 
 	    ImGui::SetCursorPos( { w_size.x - 20, 0 } );
             if( ImGui::Button( "X", { 20,20 } ) )
-				w_context.context_state = false;
+		w_context.context_state = false;
 
             ImGui::SetCursorPos( { 0, 28 } );
 	    widgets::tabs::add_tab( "Processes", tabs::TAB_PROCESSES, current_tab == tabs::TAB_PROCESSES );
