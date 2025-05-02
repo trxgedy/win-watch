@@ -312,7 +312,7 @@ namespace ui
 
             switch ( current_tab )
             {
-				case tabs::TAB_PROCESSES:
+		case tabs::TAB_PROCESSES:
                 {
                     widgets::table::process::begin( "process_table", { w_size.x, w_size.y - 60 } );
                     {
@@ -322,8 +322,8 @@ namespace ui
                                 continue;
 
                             widgets::table::process::append( watcher_->processes.at( i ).process_name.c_str( ),
-                                                    watcher_->processes.at( i ).pid,
-                                                    watcher_->processes.at( i ).process_description.c_str( )
+	                                                     watcher_->processes.at( i ).pid,
+	                                                     watcher_->processes.at( i ).process_description.c_str( )
                             );
                         }
                     }
@@ -343,8 +343,8 @@ namespace ui
                             widgets::table::service::append( watcher_->services.at( i ).service_name.c_str( ),
                                                              watcher_->services.at( i ).pid,
                                                              watcher_->services.at( i ).display_name.c_str( ),
-															 watcher_->services.at( i ).status,
-															 watcher_->services.at( i ).start_type
+							     watcher_->services.at( i ).status,
+							     watcher_->services.at( i ).start_type
                             );
                         }
                     }
