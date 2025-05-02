@@ -7,18 +7,18 @@ monitors and interacts with window's processes and services
 - sort by name and pid
 
   ## to do
-  # process interaction
+  ### process interaction
   - kill
   - suspend
   - restart
     
-  # process properties
+  ### process properties
   - path
   - strings
   - threads
   - modules
  
-  ## service interaction
+  ### service interaction
   - suspend
   - stop
   - start    
