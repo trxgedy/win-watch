@@ -7,6 +7,10 @@ monitors and interacts with window's processes and services
 - sort by name and pid
 
   ## to do
+
+  ### fix
+  ✅ service update algorithm
+  
   ### process interaction
   - kill
   - suspend
