@@ -8,6 +8,9 @@ monitors and interacts with window's processes and services
 
   ## to do
 
+  ### general
+  - ( process | service ) search algorithm
+
   ### fix
   ✅ service update algorithm
   
@@ -25,7 +28,7 @@ monitors and interacts with window's processes and services
   ### service interaction
   - suspend
   - stop
-  - start    
+  - start
 
 ![image](https://github.com/user-attachments/assets/c9accb86-57d9-44d6-9ee0-ba6a5d835317)
 
