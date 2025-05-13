@@ -376,11 +376,12 @@ namespace ui
 						{
 							for ( const auto &search : watcher_->searched_services )
 							{
-								widgets::table::service::append( search.service_name.c_str( ),
-																 search.pid,
-																 search.display_name.c_str( ),
-																 search.status,
-																 search.start_type
+								widgets::table::service::append(
+									search.service_name.c_str( ),
+									search.pid,
+									search.display_name.c_str( ),
+									search.status,
+									search.start_type
 								);
 							}
 						}
@@ -388,11 +389,12 @@ namespace ui
 						{
 							for ( const auto &svc : watcher_->services )
 							{
-								widgets::table::service::append( svc.service_name.c_str( ),
-																 svc.pid,
-																 svc.display_name.c_str( ),
-																 svc.status,
-																 svc.start_type
+								widgets::table::service::append(
+									svc.service_name.c_str( ),
+									svc.pid,
+									svc.display_name.c_str( ),
+									svc.status,
+									svc.start_type
 								);
 							}
 						}
