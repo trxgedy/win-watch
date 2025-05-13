@@ -185,10 +185,22 @@ namespace watcher
 				{
 					return p.process_name;
 				} );
+
+				process::sort::sort_by_name<PROCESS_INFO>( this->searched_processes, [ ]( const PROCESS_INFO &p )
+				{
+					return p.process_name;
+				} );
+
 				process::sort::sort_by_name<SERVICE_INFO>( this->services, [ ]( const SERVICE_INFO &s )
 				{
 					return s.service_name;
 				} );
+
+				process::sort::sort_by_name<SERVICE_INFO>( this->searched_services, [ ]( const SERVICE_INFO &s )
+				{
+					return s.service_name;
+				} );
+
 
 				break;
 			}
@@ -199,7 +211,18 @@ namespace watcher
 				{
 					return p.pid;
 				} );
+
+				process::sort::sort_by_pid<PROCESS_INFO>( this->searched_processes, [ ]( const PROCESS_INFO &p )
+				{
+					return p.pid;
+				} );
+
 				process::sort::sort_by_pid<SERVICE_INFO>( this->services, [ ]( const SERVICE_INFO &s )
+				{
+					return s.pid;
+				} );
+
+				process::sort::sort_by_pid<SERVICE_INFO>( this->searched_services, [ ]( const SERVICE_INFO &s )
 				{
 					return s.pid;
 				} );
