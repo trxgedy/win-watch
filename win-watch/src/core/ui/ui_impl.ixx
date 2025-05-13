@@ -270,8 +270,8 @@ namespace ui
 		style.WindowBorderSize = 0;
 		style.ChildRounding = 0;
 		style.FrameRounding = 0;
-		style.ScrollbarRounding = 0;
 		style.GrabRounding = 0;
+		style.ScrollbarRounding = 0;
 	}
 
 	void c_window::menu_design( )
