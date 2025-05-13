@@ -10,7 +10,7 @@ int __stdcall WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, CHAR *lpCmd
 
 	const auto window_ { std::make_unique<ui::c_window>( ) };
 
-	if ( !window_->render_window( "wow", 1280, 720 ) )
+	if ( !window_->render_window( "win-watch", 1280, 720 ) )
 		throw std::runtime_error( "Failed to create window" );
 
 	return EXIT_SUCCESS;
