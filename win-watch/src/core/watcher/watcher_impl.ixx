@@ -201,7 +201,6 @@ namespace watcher
 					return s.service_name;
 				} );
 
-
 				break;
 			}
 
