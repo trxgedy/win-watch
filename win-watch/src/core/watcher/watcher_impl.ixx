@@ -126,6 +126,7 @@ namespace watcher
 			const auto new_services = process::core::get_every_service_info( );
 
 			std::unordered_map<std::string, const SERVICE_INFO *> new_services_map;
+
 			for ( const auto &new_svc : new_services )
 			{
 				new_services_map[ new_svc.service_name ] = &new_svc;

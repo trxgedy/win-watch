@@ -321,10 +321,17 @@ namespace ui
 				strcpy_s( watcher_->search, search_buffer );
 			}
 
+			ImGui::PushStyleColor( ImGuiCol_Button, ImColor( 23, 23, 23 ).Value );
+
 			ImGui::SameLine( 0, 0 );
 
 			if ( ImGui::Button( "o", { 20,20 } ) )
 				strcpy_s( watcher_->search, "" );
+
+			if ( ImGui::IsItemHovered( ) )
+				ImGui::SetTooltip( "clear search" );
+
+			ImGui::PopStyleColor( );
 
 			ImGui::SetCursorPos( padding );
 
