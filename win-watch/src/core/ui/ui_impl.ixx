@@ -326,7 +326,10 @@ namespace ui
 			ImGui::SameLine( 0, 0 );
 
 			if ( ImGui::Button( "o", { 20,20 } ) )
+			{
+				strcpy_s( search_buffer, "" );
 				strcpy_s( watcher_->search, "" );
+			}
 
 			if ( ImGui::IsItemHovered( ) )
 				ImGui::SetTooltip( "clear search" );
