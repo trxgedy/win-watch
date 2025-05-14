@@ -30,6 +30,6 @@ monitors and interacts with window's processes and services
   - stop
   - start
 
-![image](https://github.com/user-attachments/assets/c9accb86-57d9-44d6-9ee0-ba6a5d835317)
+![image](https://github.com/user-attachments/assets/fbf4b9a3-5931-4fc1-aaf6-ae54e0429cc6)
 
-![image](https://github.com/user-attachments/assets/07a86318-3766-4de2-a530-a4bbdeedb7e2)
+![image](https://github.com/user-attachments/assets/f759f89c-3724-43a8-adba-95c00c4109b5)
