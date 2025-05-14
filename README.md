@@ -5,6 +5,7 @@ monitors and interacts with window's processes and services
 - get process name, pid, description
 - get service name, pid, display name, status, start type
 - sort by name and pid
+- search by name and pid
 
   ## to do
 
