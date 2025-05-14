@@ -23,7 +23,7 @@ monitors and interacts with window's processes and services
   - path
   - strings
   - threads
-  - modules
+  ✅ modules
  
   ### service interaction
   - suspend
