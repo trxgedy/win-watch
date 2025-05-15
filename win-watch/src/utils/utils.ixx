@@ -4,7 +4,7 @@ module;
 #include <TlHelp32.h>
 #include <algorithm>
 
-#include "ext\structs\structs.hpp"
+#include "ext\definitions\structs.hpp"
 
 import std;
 
@@ -14,8 +14,8 @@ export namespace utils
 {
 	namespace string
 	{
-		template <typename type> 
-		requires ( std::convertible_to< type, std::string > || std::convertible_to< type, std::wstring > )
+		template <typename type>
+			requires ( std::convertible_to< type, std::string > || std::convertible_to< type, std::wstring > )
 		type to_lower( type str )
 		{
 			std::transform( str.begin( ), str.end( ), str.begin( ), ::tolower );
@@ -64,7 +64,7 @@ export namespace utils
 		auto parse_file_name( const std::string_view &file_path ) -> std::string_view
 		{
 			const auto index = file_path.find_last_of( "\\" );
-			
+
 			return file_path.substr( index + 1 );
 		}
 	}

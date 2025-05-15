@@ -1,4 +1,4 @@
-#include "ext\structs\structs.hpp"
+#include "ext\definitions\structs.hpp"
 
 import std;
 import Utils;

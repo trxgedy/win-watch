@@ -21,7 +21,7 @@
     <ClCompile Include="src\utils\utils.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ext\structs\structs.hpp">
+    <ClCompile Include="ext\definitions\structs.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\core\watcher\watcher.ixx">
@@ -105,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ext\ui\imgui\imstb_truetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\definitions\kernel_functions.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

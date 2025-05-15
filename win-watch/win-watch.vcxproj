@@ -175,7 +175,7 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCppModule</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsCppModule</CompileAs>
     </ClCompile>
-    <ClCompile Include="ext\structs\structs.hpp">
+    <ClCompile Include="ext\definitions\structs.hpp">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsHeaderUnit</CompileAs>
     </ClCompile>
     <ClCompile Include="ext\ui\resources\fonts\fonts.ixx">
@@ -221,6 +221,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ext\definitions\kernel_functions.hpp" />
     <ClInclude Include="ext\ui\imgui\imconfig.h" />
     <ClInclude Include="ext\ui\imgui\imgui.h" />
     <ClInclude Include="ext\ui\imgui\imgui_impl_dx11.h" />

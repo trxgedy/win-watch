@@ -1,8 +1,9 @@
 #include <Windows.h>
 #include <TlHelp32.h>
 #include <Psapi.h>
+#include <winternl.h>
 
-#include "ext\structs\structs.hpp"
+#include "ext\definitions\structs.hpp"
 
 import std;
 import Utils;
@@ -262,8 +263,32 @@ export namespace process
 
 		auto get_process_threads( const std::uint32_t pid ) -> std::vector<THREAD_PROPERTIES>
 		{
+			const auto snapshot = CreateToolhelp32Snapshot( TH32CS_SNAPTHREAD, pid );
 
-			return {};
+			std::vector<THREAD_PROPERTIES> threads;
+			threads.reserve( 32 );
+
+			if ( snapshot == INVALID_HANDLE_VALUE )
+				return {};
+
+			THREADENTRY32 entry { .dwSize = sizeof( entry ) };
+
+			do
+			{
+				THREAD_PROPERTIES buffer {};
+
+				buffer.priority = entry.tpBasePri;
+				buffer.tid = entry.th32ThreadID;
+
+				threads.emplace_back( buffer );
+
+			} while ( Thread32Next( snapshot, &entry ) );
+
+			CloseHandle( snapshot );
+
+			threads.shrink_to_fit( );
+
+			return threads;
 		}
 
 		auto get_process_windows( const std::uint32_t pid ) -> std::vector<WINDOW_PROPERTIES>
