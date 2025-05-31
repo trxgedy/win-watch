@@ -28,7 +28,6 @@ typedef struct PROCESS_INFO
 	std::uint32_t pid {};
 
 	std::string process_name {};
-	std::string process_path {};
 	std::string process_description {};
 };
 

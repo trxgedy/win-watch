@@ -8,18 +8,74 @@ import Fonts;
 import Ui;
 import Watcher;
 import Utils;
+import Process;
 
 export module Widgets;
 
 export namespace widgets
 {
+	namespace properties
+	{
+		std::unordered_map< std::uint32_t, bool > properties_tabs_open;
+
+		void open( const std::uint32_t pid )
+		{
+			constexpr auto flags { ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar };
+
+			ImGui::PushStyleColor( ImGuiCol_WindowBg, ImColor( 32, 32, 32 ).Value );
+			ImGui::PushStyleColor( ImGuiCol_ChildBg, ImColor( 32, 32, 32 ).Value );
+			ImGui::PushStyleColor( ImGuiCol_Button, ImColor( 142, 22, 22 ).Value );
+
+			ImGui::PushStyleVar( ImGuiStyleVar_FrameRounding, 5.f );
+
+			ImGui::SetNextWindowSize( { 445, 570 } );
+			ImGui::Begin( "##properties", false, flags );
+			{
+				ImGui::SetCursorPos( { 10, 10 } );
+				ImGui::BeginChild( "properties_child", { 430, 555 } );
+				{
+					static auto process_info = process::core::get_process_info( pid );
+					static auto process_modules = process::properties::get_process_modules( pid );
+
+					ImGui::Text( "Properties: %s ( %d )", process_info.process_name.c_str( ), pid );
+
+					ImGui::Separator( );
+					ImGui::NewLine( );
+
+					ImGui::Text( "Name: %s", process_info.process_name.c_str( ) );
+					ImGui::Text( "PID: %d", process_info.pid );
+					ImGui::Text( "Description: %s", process_info.process_description.c_str( ) );
+					ImGui::Text( "Path: %s", process_modules.at( 1 ).module_path.c_str( ) );
+
+					ImGui::NewLine( );
+					ImGui::Separator( );
+					ImGui::NewLine( );
+
+					if ( ImGui::Button( "Terminate", { 200, 30 } ) )
+						process::actions::terminate_process( pid );
+
+					if ( ImGui::Button( "Suspend", { 200, 30 } ) )
+						process::actions::suspend_process( pid );
+
+					if ( ImGui::Button( "Resume", { 200, 30 } ) )
+						process::actions::resume_process( pid );
+				}
+				ImGui::EndChild( );
+			}
+			ImGui::End( );
+
+			ImGui::PopStyleVar( );
+			ImGui::PopStyleColor( 3 );
+		}
+	}
+
 	namespace table
 	{
 		namespace process
 		{
 			void begin( const char *str_id, ImVec2 size )
 			{
-				static  bool resize_once = true;
+				static bool resize_once = true;
 
 				ImGui::BeginChild( str_id, size, 0, ImGuiWindowFlags_NoScrollbar );
 				{
@@ -57,7 +113,8 @@ export namespace widgets
 				ImGui::Text( "%s", name );
 
 				ImGui::SameLine( -30 );
-				ImGui::InvisibleButton( utils::string::generate_random_string( ).c_str( ), ImVec2( 1280, ImGui::GetTextLineHeight( ) ) );
+				if ( ImGui::Button( std::to_string( pid ).c_str( ), ImVec2( 1280, ImGui::GetTextLineHeight( ) ) ) )
+					properties::properties_tabs_open[ pid ] = true;
 
 				ImGui::NextColumn( );
 				ImGui::Text( "%d", pid );

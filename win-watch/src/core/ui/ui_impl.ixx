@@ -324,7 +324,6 @@ namespace ui
 			ImGui::PushStyleColor( ImGuiCol_Button, ImColor( 23, 23, 23 ).Value );
 
 			ImGui::SameLine( 0, 0 );
-
 			if ( ImGui::Button( "o", { 20,20 } ) )
 			{
 				strcpy_s( search_buffer, "" );
@@ -413,6 +412,12 @@ namespace ui
 
 					break;
 				}
+			}
+
+			for ( const auto &[pid, is_open] : widgets::properties::properties_tabs_open )
+			{
+				if ( is_open )
+					widgets::properties::open( pid );
 			}
 
 			ImGui::End( );

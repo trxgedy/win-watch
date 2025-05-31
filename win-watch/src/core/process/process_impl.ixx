@@ -4,6 +4,7 @@
 #include <winternl.h>
 
 #include "ext\definitions\structs.hpp"
+#include "ext\definitions\kernel_functions.hpp"
 
 import std;
 import Utils;
@@ -87,42 +88,6 @@ export namespace process
 			return std::nullopt;
 		}
 
-		auto get_process_description( const std::uint32_t pid ) -> std::optional<std::string>
-		{
-			const auto process_handle = OpenProcess( PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid );
-
-			if ( !process_handle )
-				return std::nullopt;
-
-			char exe_path[ MAX_PATH ];
-			if ( !GetModuleFileNameExA( process_handle, nullptr, exe_path, MAX_PATH ) )
-			{
-				CloseHandle( process_handle );
-				return std::nullopt;
-			}
-
-			CloseHandle( process_handle );
-
-			DWORD handle = 0;
-			std::uint32_t version_info_size = GetFileVersionInfoSizeA( exe_path, &handle );
-
-			if ( version_info_size == 0 )
-				return std::nullopt;
-
-			std::vector<BYTE> version_info( version_info_size );
-
-			if ( !GetFileVersionInfoA( exe_path, handle, version_info_size, version_info.data( ) ) )
-				return std::nullopt;
-
-			std::uint32_t size = 0;
-			void *description_buffer = nullptr;
-
-			if ( VerQueryValueA( version_info.data( ), R"(\StringFileInfo\040904b0\FileDescription)", &description_buffer, &size ) && description_buffer )
-				return std::string( static_cast< char * >( description_buffer ), size );
-
-			return std::nullopt;
-		}
-
 		auto get_process_info( const std::uint32_t pid ) -> PROCESS_INFO
 		{
 			const auto snapshot = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
@@ -140,7 +105,7 @@ export namespace process
 
 					buffer.pid = entry.th32ProcessID;
 					buffer.process_name = entry.szExeFile;
-					buffer.process_description = get_process_description( buffer.pid ).value_or( " " );
+					buffer.process_description = properties::get_process_description( buffer.pid ).value_or( " " );
 
 				} while ( Process32Next( snapshot, &entry ) );
 
@@ -261,11 +226,12 @@ export namespace process
 			return modules;
 		}
 
-		auto get_process_threads( const std::uint32_t pid ) -> std::vector<THREAD_PROPERTIES>
+		// done?
+		auto get_process_threads( const std::uint32_t pid ) -> std::vector<std::uint32_t>
 		{
 			const auto snapshot = CreateToolhelp32Snapshot( TH32CS_SNAPTHREAD, pid );
 
-			std::vector<THREAD_PROPERTIES> threads;
+			std::vector<uint32_t> threads;
 			threads.reserve( 32 );
 
 			if ( snapshot == INVALID_HANDLE_VALUE )
@@ -275,12 +241,10 @@ export namespace process
 
 			do
 			{
-				THREAD_PROPERTIES buffer {};
+				if ( entry.th32OwnerProcessID != pid )
+					continue;
 
-				buffer.priority = entry.tpBasePri;
-				buffer.tid = entry.th32ThreadID;
-
-				threads.emplace_back( buffer );
+				threads.emplace_back( entry.th32ThreadID );
 
 			} while ( Thread32Next( snapshot, &entry ) );
 
@@ -291,10 +255,98 @@ export namespace process
 			return threads;
 		}
 
+		// to do
 		auto get_process_windows( const std::uint32_t pid ) -> std::vector<WINDOW_PROPERTIES>
 		{
 
 			return {};
 		}
+
+		auto get_process_description( const std::uint32_t pid ) -> std::optional<std::string>
+		{
+			const auto process_handle = OpenProcess( PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid );
+
+			if ( !process_handle )
+				return std::nullopt;
+
+			char exe_path[ MAX_PATH ];
+			if ( !GetModuleFileNameExA( process_handle, nullptr, exe_path, MAX_PATH ) )
+			{
+				CloseHandle( process_handle );
+				return std::nullopt;
+			}
+
+			CloseHandle( process_handle );
+
+			DWORD handle = 0;
+			std::uint32_t version_info_size = GetFileVersionInfoSizeA( exe_path, &handle );
+
+			if ( version_info_size == 0 )
+				return std::nullopt;
+
+			std::vector<BYTE> version_info( version_info_size );
+
+			if ( !GetFileVersionInfoA( exe_path, handle, version_info_size, version_info.data( ) ) )
+				return std::nullopt;
+
+			std::uint32_t size = 0;
+			void *description_buffer = nullptr;
+
+			if ( VerQueryValueA( version_info.data( ), R"(\StringFileInfo\040904b0\FileDescription)", &description_buffer, &size ) && description_buffer )
+				return std::string( static_cast< char * >( description_buffer ), size );
+
+			return std::nullopt;
+		}
+	}
+
+	namespace actions
+	{
+		auto terminate_process( const std::uint32_t pid ) -> void
+		{
+			const auto process_handle = OpenProcess( PROCESS_TERMINATE, false, pid );
+
+			if ( !process_handle )
+				return;
+
+			TerminateProcess( process_handle, 0 );
+			CloseHandle( process_handle );
+		}
+
+		auto suspend_process( const std::uint32_t pid ) -> void
+		{
+			const auto threads = properties::get_process_threads( pid );
+
+			for ( const auto thread : threads )
+			{
+				const auto thread_handle = OpenThread( THREAD_SUSPEND_RESUME, false, thread );
+				if ( !thread_handle )
+				{
+					std::println( "{}", GetLastError( ) );
+					continue;
+				}
+
+				SuspendThread( thread_handle );
+				CloseHandle( thread_handle );
+			}
+		}
+
+		auto resume_process( const std::uint32_t pid ) -> void
+		{
+			const auto threads = properties::get_process_threads( pid );
+
+			for ( const auto thread : threads )
+			{
+				const auto thread_handle = OpenThread( THREAD_SUSPEND_RESUME, false, thread );
+				if ( !thread_handle )
+				{
+					std::println( "{}", GetLastError( ) );
+					continue;
+				}
+
+				ResumeThread( thread_handle );
+				CloseHandle( thread_handle );
+			}
+		}
+
 	}
 }

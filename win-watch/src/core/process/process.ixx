@@ -12,7 +12,6 @@ export namespace process
 		auto get_privileges( ) -> bool;
 		auto get_all_pids( ) -> std::vector<std::uint32_t>;
 		auto get_pid( const std::string &process_name ) -> std::optional<std::uint32_t>;
-		auto get_process_description( const std::uint32_t pid ) -> std::optional<std::string>;
 		auto get_process_info( const std::uint32_t pid ) -> PROCESS_INFO;
 		auto get_service_start_type( const std::string &service_name ) -> std::uint32_t;
 		auto get_every_service_info( ) -> std::vector<SERVICE_INFO>;
@@ -21,8 +20,16 @@ export namespace process
 	namespace properties
 	{
 		auto get_process_modules( const std::uint32_t pid ) -> std::vector<PROCESS_MODULE_LIST>; // done
-		auto get_process_threads( const std::uint32_t pid ) -> std::vector<THREAD_PROPERTIES>; // to do
+		auto get_process_threads( const std::uint32_t pid ) -> std::vector<std::uint32_t>; // to do
 		auto get_process_windows( const std::uint32_t pid ) -> std::vector<WINDOW_PROPERTIES>; // to do
+		auto get_process_description( const std::uint32_t pid ) -> std::optional<std::string>;
+	}
+
+	namespace actions
+	{
+		auto terminate_process( const std::uint32_t pid ) -> void;
+		auto suspend_process( const std::uint32_t pid ) -> void;
+		auto resume_process( const std::uint32_t pid ) -> void;
 	}
 
 	namespace sort
