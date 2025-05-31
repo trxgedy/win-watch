@@ -21,9 +21,9 @@ monitors and interacts with window's processes and services
   - ✅ resume
     
   ### process properties
-  - path
+  - ✅ path
   - strings
-  - threads
+  - ✅ threads
   - windows
   - ✅ modules
  
