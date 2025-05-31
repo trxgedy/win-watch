@@ -16,9 +16,9 @@ monitors and interacts with window's processes and services
   ✅ service update algorithm
   
   ### process interaction
-    ✅kill
-    ✅ suspend
-    ✅ restart
+  ✅ kill
+  ✅ suspend
+  ✅ resume
     
   ### process properties
   - path
