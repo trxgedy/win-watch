@@ -10,15 +10,15 @@ monitors and interacts with window's processes and services
   ## to do
 
   ### general
-  ✅ ( process | service ) search algorithm
+  - ✅ ( process | service ) search algorithm
 
   ### fix
-  ✅ service update algorithm
+  - ✅ service update algorithm
   
   ### process interaction
-  ✅ kill
-  ✅ suspend
-  ✅ resume
+  - ✅ kill
+  - ✅ suspend
+  - ✅ resume
     
   ### process properties
   - path
