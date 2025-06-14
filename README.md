@@ -23,9 +23,9 @@ monitors and interacts with window's processes and services
   ### process properties
   - ✅ path
   - strings
-  - ✅ threads
+  - 🟨 threads (ui integration pending)
   - windows
-  - ✅ modules
+  - 🟨 modules (ui integration pending)
  
   ### service interaction
   - suspend
