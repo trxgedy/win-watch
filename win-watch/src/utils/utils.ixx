@@ -15,7 +15,7 @@ export namespace utils
 	namespace string
 	{
 		template <typename type>
-			requires ( std::convertible_to< type, std::string > || std::convertible_to< type, std::wstring > )
+		requires ( std::convertible_to< type, std::string > || std::convertible_to< type, std::wstring > )
 		type to_lower( type str )
 		{
 			std::transform( str.begin( ), str.end( ), str.begin( ), ::tolower );
